@@ -1,0 +1,26 @@
+:root{--bg:#FFF8F5;--card:#fff;--text:#3B1A22;--muted:#8A6A70;--border:#F1DDE2;--accent:#E8436A;--soft:#FBD3DC;--pink:#F7A1B5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+header{display:flex;align-items:center;justify-content:space-between;max-width:760px;margin:0 auto;padding:20px 16px}
+header a.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:var(--text);text-decoration:none}
+header a.brand img{width:36px;height:36px}
+nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-weight:600;font-size:15px}
+nav a:hover{color:var(--text)}
+main{max-width:760px;margin:0 auto;padding:8px 16px 48px}
+.hero{background:var(--pink);border-radius:32px;text-align:center;padding:56px 20px 48px;margin-top:8px}
+.hero img{width:150px;height:150px}
+.hero h1{font-size:44px;line-height:1.1;margin:16px 0 8px;letter-spacing:-.02em}
+.hero p{font-size:20px;margin:0 auto;max-width:460px}
+.badge{display:inline-block;margin-top:24px;background:var(--text);color:#fff;border-radius:999px;padding:14px 26px;font-weight:700;text-decoration:none}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:24px 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:20px}
+.card h3{margin:0 0 4px;font-size:18px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.doc h1{font-size:34px;letter-spacing:-.02em;margin:24px 0 4px}
+.doc .updated{color:var(--muted);margin-top:0}
+.doc h2{font-size:21px;margin-top:32px}
+.box{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:20px 22px;margin:20px 0}
+footer{max-width:760px;margin:0 auto;padding:24px 16px 40px;color:var(--muted);font-size:14px;border-top:1px solid var(--border)}
+footer a{color:var(--muted);margin-right:14px}
+@media(max-width:520px){.hero h1{font-size:34px}nav a{margin-left:10px;font-size:14px}}
