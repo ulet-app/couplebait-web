@@ -70,11 +70,11 @@
   <h2>20 packs. From <span class="hl">cute</span> to spicy.</h2>
   <p class="sub">Three packs are free forever. Unlock the rest with one purchase.</p>
   <div class="pack-grid">
-    <div class="pack-group"><h4>Most Popular</h4><div class="chips"><span>😤 Ragebait</span><span>🚩 Red Flags</span><span>💀 Toxic Traits</span><span>🌶️ Spicy <em>18+</em></span></div></div>
-    <div class="pack-group"><h4>Free to play</h4><div class="chips"><span>🧊 Icebreakers</span><span>👀 Who's Most Likely</span><span>🧩 Do You Know Me?</span></div></div>
-    <div class="pack-group"><h4>Just for Fun</h4><div class="chips"><span>🤔 Would You Rather</span><span>🍷 Tipsy Talk</span><span>🌹 First Dates</span><span>🔮 Future Us</span></div></div>
-    <div class="pack-group"><h4>Deep Talk</h4><div class="chips"><span>🌙 Deep Talk</span><span>💚 Green Flags</span><span>🫠 Situationship</span><span>💌 Love Languages</span><span>✈️ Long Distance</span></div></div>
-    <div class="pack-group"><h4>After Dark <em>18+</em></h4><div class="chips"><span>😈 Freaky</span><span>🥵 Extra Spicy</span><span>💋 Fantasies</span><span>🤫 Confessions</span></div></div>
+    <div class="pack-group"><h4>Most Popular</h4><div class="chips"><span><img class="em" src="/img/emoji/1f624.png" alt=""> Ragebait</span><span><img class="em" src="/img/emoji/1f6a9.png" alt=""> Red Flags</span><span><img class="em" src="/img/emoji/1f480.png" alt=""> Toxic Traits</span><span><img class="em" src="/img/emoji/1f336-fe0f.png" alt=""> Spicy <em>18+</em></span></div></div>
+    <div class="pack-group"><h4>Free to play</h4><div class="chips"><span><img class="em" src="/img/emoji/1f9ca.png" alt=""> Icebreakers</span><span><img class="em" src="/img/emoji/1f440.png" alt=""> Who's Most Likely</span><span><img class="em" src="/img/emoji/1f9e9.png" alt=""> Do You Know Me?</span></div></div>
+    <div class="pack-group"><h4>Just for Fun</h4><div class="chips"><span><img class="em" src="/img/emoji/1f914.png" alt=""> Would You Rather</span><span><img class="em" src="/img/emoji/1f377.png" alt=""> Tipsy Talk</span><span><img class="em" src="/img/emoji/1f339.png" alt=""> First Dates</span><span><img class="em" src="/img/emoji/1f52e.png" alt=""> Future Us</span></div></div>
+    <div class="pack-group"><h4>Deep Talk</h4><div class="chips"><span><img class="em" src="/img/emoji/1f319.png" alt=""> Deep Talk</span><span><img class="em" src="/img/emoji/1f49a.png" alt=""> Green Flags</span><span><img class="em" src="/img/emoji/1fae0.png" alt=""> Situationship</span><span><img class="em" src="/img/emoji/1f48c.png" alt=""> Love Languages</span><span><img class="em" src="/img/emoji/2708-fe0f.png" alt=""> Long Distance</span></div></div>
+    <div class="pack-group"><h4>After Dark <em>18+</em></h4><div class="chips"><span><img class="em" src="/img/emoji/1f608.png" alt=""> Freaky</span><span><img class="em" src="/img/emoji/1f975.png" alt=""> Extra Spicy</span><span><img class="em" src="/img/emoji/1f48b.png" alt=""> Fantasies</span><span><img class="em" src="/img/emoji/1f92b.png" alt=""> Confessions</span></div></div>
   </div>
 </section>
 
@@ -101,12 +101,12 @@
 <script>
 (function(){
   var Q=[
-    ['😤','Ragebait',"who's the better driver here and why is it obviously me?"],
-    ['🚩','Red Flags',"they still follow their ex. red flag?"],
-    ['👀',"Who's Most Likely","who's most likely to cry at a dog food commercial?"],
-    ['🤔','Would You Rather',"would you rather read my texts or I read yours?"],
-    ['🌙','Deep Talk',"what's something you've never told me about us?"],
-    ['🌶️','Spicy',"what can I do to make you feel sexier?"]
+    ['<img class=\"em\" src=\"/img/emoji/1f624.png\" alt=\"\">','Ragebait',"who's the better driver here and why is it obviously me?"],
+    ['<img class=\"em\" src=\"/img/emoji/1f6a9.png\" alt=\"\">','Red Flags',"they still follow their ex. red flag?"],
+    ['<img class=\"em\" src=\"/img/emoji/1f480.png\" alt=\"\">','Toxic Traits',"what's a toxic trait of mine you secretly find cute?"],
+    ['<img class=\"em\" src=\"/img/emoji/1f49a.png\" alt=\"\">','Green Flags',"they say sorry first, even when it's 50/50. green flag?"],
+    ['<img class=\"em\" src=\"/img/emoji/1f319.png\" alt=\"\">','Deep Talk',"what's something you've never told me about us?"],
+    ['<img class=\"em\" src=\"/img/emoji/1f336-fe0f.png\" alt=\"\">','Spicy',"what can I do to make you feel sexier?"]
   ];
   var COLORS=['#EFD9F2','#FBD3DC','#FCE6DC','#F8E1E7'];
   var NAMES=[['ELLA','TOM'],['TOM','ELLA']];
@@ -126,6 +126,7 @@
   function measure(){H=deck.offsetHeight||1}
   // p = how many cards have been swiped away (0..N-1, fractional)
   function render(p){
+    place(p);p=Math.max(p,0);
     var k=Math.floor(p),t=ease(clamp((p-k-.12)/.76,0,1));
     for(var i=0;i<N;i++){
       var c=cards[i],s=c.el.style,d=i-k;
@@ -149,9 +150,22 @@
     }
   }
   var target=0,cur=0,rec=/[?&]rec/.test(location.search);
+  var mq=window.matchMedia('(max-width:860px)'),RISE=.2;
+  var ph=document.querySelector('.hero-phone'),tx=document.querySelector('.hero-text');
   function progress(){
     var r=sec.getBoundingClientRect(),total=sec.offsetHeight-window.innerHeight;
-    return clamp(-r.top/total,0,1)*(N-1);
+    var q=clamp(-r.top/total,0,1);
+    if(!mq.matches)return q*(N-1);
+    // phone: peeks from the bottom at first, rises into place, then cards start swiping
+    return q<RISE? -(1-q/RISE) : (q-RISE)/(1-RISE)*(N-1);
+  }
+  function place(p){
+    if(!mq.matches){ph.style.transform='';tx.style.transform='';tx.style.opacity='';return}
+    var r=p<0?ease(1+p):1,vh=window.innerHeight,h=ph.offsetHeight,top=ph.offsetTop;
+    var start=vh-h*.5-top;
+    ph.style.transform='translate3d(0,'+((1-r)*start)+'px,0)';
+    tx.style.transform='translate3d(0,'+(-r*60)+'px,0) scale('+(1-r*.08)+')';
+    tx.style.opacity=1-r;
   }
   window.__tick=function(){target=progress();cur+=(target-cur)*.12;render(cur)};
   function tick(){
@@ -161,7 +175,7 @@
     render(cur);
     requestAnimationFrame(tick);
   }
-  measure();render(0);
+  measure();cur=target=progress();render(cur);
   window.addEventListener('resize',measure);
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){window.addEventListener('scroll',function(){render(Math.round(progress()))});return}
   if(!rec)requestAnimationFrame(tick);
