@@ -1,0 +1,22 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Holy Bible fotky</title>
+<style>
+body{margin:0;background:#F4E4E7;font-family:-apple-system,system-ui,sans-serif;color:#2A0F14}
+main{max-width:520px;margin:0 auto;padding:28px 16px 60px}
+h1{font-size:28px;margin:0 0 6px}p.d{margin:0 0 22px;color:#7a4a54;font-size:15px}
+.s{background:#FBF6F3;border-radius:22px;padding:14px;margin:0 0 12px;display:flex;align-items:center;gap:12px}
+.s img{width:54px;height:72px;object-fit:cover;border-radius:10px;flex-shrink:0}
+.s div{flex:1;min-width:0}.s b{display:block;font-size:17px}.s small{color:#8a6a70;font-size:13px}
+.s button{border:0;border-radius:14px;padding:12px 14px;background:#5A1A26;color:#fff;font-weight:700;font-size:15px;flex-shrink:0}
+.s button:disabled{opacity:.6}.s button.ok{background:#2A0F14}.s button.cp{background:#fff;color:#2A0F14;box-shadow:inset 0 0 0 1.5px rgba(90,26,38,.25)}
+</style></head><body><main><h1>Holy Bible fotky</h1><p class="d" id="d">Klepni na Uložit, počkej, klepni znovu a dej „Uložit 7 obrázků“. Popisek zkopíruje text s hashtagy.</p><div id="l"></div></main>
+<script>
+const R='https://raw.githubusercontent.com/ulet-app/couplebait-web/claude/project-thread-xwc9zt/';
+fetch(R+'sets.json?'+Date.now()).then(r=>r.json()).then(j=>{const v=Date.now();document.getElementById('d').textContent='Sady z '+j.date.split('-').reverse().join('. ')+'. Klepni na Uložit, počkej, klepni znovu a dej „Uložit 7 obrázků“. Popisek zkopíruje text s hashtagy.';
+j.sets.forEach((name,k)=>{const n=k+1,el=document.createElement('div');el.className='s';
+el.innerHTML=`<img src="${R}${n}/1.jpg?${v}" alt=""><div><b>${n}. ${name}</b><small>7 fotek</small></div><button type="button">Uložit</button><button type="button" class="cp">Popisek</button>`;
+const cp=el.querySelector('.cp');cp.onclick=async()=>{try{await navigator.clipboard.writeText(j.captions[k]);cp.textContent='Zkopírováno ✓'}catch(e){cp.textContent='Nejde'}setTimeout(()=>cp.textContent='Popisek',2000)};const b=el.querySelector('button'),sm=el.querySelector('small');let files=null;
+b.onclick=async()=>{if(!files){b.disabled=true;sm.textContent='Načítám…';try{const a=[];for(let i=1;i<=7;i++){const r=await fetch(`${R}${n}/${i}.jpg?${v}`);if(!r.ok)throw 0;a.push(new File([await r.blob()],`${n}-${i}.jpg`,{type:'image/jpeg'}))}
+ if(!navigator.canShare||!navigator.canShare({files:a})){sm.textContent='Tady to nejde, otevři v Safari.';b.disabled=false;return}files=a;b.textContent='Do Fotek';b.classList.add('ok');sm.textContent='Klepni znovu';}catch(e){sm.textContent='Chyba načtení, zkus znovu.'}b.disabled=false;return}
+ try{await navigator.share({files});sm.textContent='Hotovo ✓'}catch(e){sm.textContent=e.name==='AbortError'?'Zrušeno':'Chyba: '+e.name}};
+document.getElementById('l').appendChild(el)})}).catch(()=>{document.getElementById('d').textContent='Nepodařilo se načíst sady.'});
+</script></body></html>
